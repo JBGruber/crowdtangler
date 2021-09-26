@@ -22,8 +22,8 @@ test_that("posts", {
   expect_equal(
     {
       out <- ct_posts(count = 1)
-      c(class(out), ncol(out), nrow(out))
+      c(class(out), ncol(out) >= 34, nrow(out))
     },
-    c("tbl_df", "tbl", "data.frame", "34", "1")
+    c("tbl_df", "tbl", "data.frame", "TRUE", "1")
   )
 })
