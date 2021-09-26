@@ -52,8 +52,8 @@ ct_posts <- function(accounts = NULL,
                      searchTerm = NULL,
                      sortBy = NULL,
                      verified = NULL,
-                     parse = FALSE,
-                     data = "./data",
+                     parse = TRUE,
+                     data = NULL,
                      token = NULL) {
 
   base_url <- "https://api.crowdtangle.com/"
@@ -88,6 +88,11 @@ ct_posts <- function(accounts = NULL,
   }
   pages <- ceiling(count / 100L)
   if (count > 100L) count <- 100L
+
+  if (is.null(data)) {
+    data <- tempdir()
+    on.exit(unlink(data))
+  }
 
   url <- modify_url(
     base_url,

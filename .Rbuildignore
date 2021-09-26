@@ -3,3 +3,4 @@
 .cttoken
 Update_package.R
 ^README\.Rmd$
+^\.github$
