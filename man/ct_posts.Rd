@@ -33,8 +33,8 @@ Branded Content, either as Publisher or Marketer.}
 
 \item{count}{The maximum number of posts to return.}
 
-\item{list}{The list of the leaderboard to retrieve. Use ct_getlists() to
-retrieve a overview of your lists.}
+\item{list}{The list of the leaderboard to retrieve. Use \link{ct_getlists}
+to retrieve a overview of your lists.}
 
 \item{start}{Start date to create the leaderboard. Format is
 “yyyy-mm-ddThh:mm:ss”. Times have to be provided as UTC times. Default is

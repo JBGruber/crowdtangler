@@ -14,8 +14,8 @@
 #'   platform IDs (ie 1436859892).
 #' @param brandedContent Limits to or excludes posts that have been marked as
 #'   Branded Content, either as Publisher or Marketer.
-#' @param list The list of the leaderboard to retrieve. Use ct_getlists() to
-#'   retrieve a overview of your lists.
+#' @param list The list of the leaderboard to retrieve. Use \link{ct_getlists}
+#'   to retrieve a overview of your lists.
 #' @param includeHistory Includes timestep data for growth of each post
 #'   returned.
 #' @param language 2-character code of language.
@@ -114,7 +114,7 @@ ct_posts <- function(accounts = NULL,
                            data = data, token = token)
 
   if (parse) {
-    return(parse_posts(json_files))
+    return(ct_parse_posts(json_files))
   } else {
     invisible(json_files)
   }
@@ -123,13 +123,18 @@ ct_posts <- function(accounts = NULL,
 
 #' Parse Data from Posts Endpoint
 #'
+#' Given a file or files from a call to \link{ct_posts}, the function parses
+#' the json format into a (mostly) tidy data.frame (tibble). Duplicated entries
+#' (resulting from, e.g., multiple downloads of posts from the same list) are
+#' automatically removed.
+#'
 #' @param x files(s) or directory path
 #' @param recursive if x is a directory, should the function scan recursively
 #'   for more files.
 #'
 #' @return data.frame (tibble)
 #' @export
-parse_posts <- function(x, recursive = FALSE) {
+ct_parse_posts <- function(x, recursive = FALSE) {
   if (dir.exists(x)) {
     x <- list.files(
       path = x,
@@ -149,8 +154,13 @@ parse_posts <- function(x, recursive = FALSE) {
     stop("x should be an existing directory or file(s)")
   }
 
-  out <- purrr::map_df(json_l, function(p) {
+  pb <- progress::progress_bar$new(
+    total = length(json_l),
+    format = "parsing [:bar] :percent eta: :eta"
+  )
 
+  out <- purrr::map_df(json_l, function(p) {
+    pb$tick()
     account <- tibble::as_tibble(
       p$account,
       .name_repair = function(x) paste0("accout_", x)
@@ -190,4 +200,5 @@ parse_posts <- function(x, recursive = FALSE) {
       account, p, links, media
     ))
   })
+  out[!duplicated(out$id), ]
 }

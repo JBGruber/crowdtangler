@@ -3,7 +3,7 @@
 export(ct_auth)
 export(ct_getlists)
 export(ct_leaderboard)
+export(ct_parse_posts)
 export(ct_posts)
-export(parse_posts)
 import(httr)
 importFrom(utils,menu)

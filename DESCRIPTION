@@ -9,11 +9,12 @@ Depends:
     R (>= 3.5.0)
 License: GPL-3
 Imports:
-    httr,
     dplyr,
+    httr,
+    jsonlite,
+    progress,
     purrr,
-    tibble,
-    jsonlite
+    tibble
 Suggests:
     knitr,
     testthat,

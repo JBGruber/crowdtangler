@@ -24,7 +24,7 @@ exclusive; if both are sent, accountIds will be preferred.}
 \item{count}{The number of accounts to return on the leaderboard. Default is
 50.}
 
-\item{list}{The list of the leaderboard to retrieve. Use ct_getlists() to
+\item{list}{The list of the leaderboard to retrieve. Use \link{ct_getlists} to
 retrieve a overview of your lists.}
 
 \item{start}{Start date to create the leaderboard. Format is

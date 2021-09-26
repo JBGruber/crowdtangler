@@ -7,7 +7,7 @@
 #'   exclusive; if both are sent, accountIds will be preferred.
 #' @param count The number of accounts to return on the leaderboard. Default is
 #'   50.
-#' @param list The list of the leaderboard to retrieve. Use ct_getlists() to
+#' @param list The list of the leaderboard to retrieve. Use \link{ct_getlists} to
 #'   retrieve a overview of your lists.
 #' @param start Start date to create the leaderboard. Format is
 #'   “yyyy-mm-ddThh:mm:ss”. Times have to be provided as UTC times. Default is
