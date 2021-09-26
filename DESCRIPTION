@@ -1,0 +1,28 @@
+Package: crowdtangler
+Title: API package for https://crowdtangle.com
+Version: 0.0.1.9000
+Date: 2021-09-26
+Authors@R: person("Johannes", "Gruber", email = "j.gruber.1@research.gla.ac.uk",
+  role = c("aut", "cre"))
+Description: API package for https://crowdtangle.com.
+Depends:
+    R (>= 3.5.0)
+License: GPL-3
+Imports:
+    httr,
+    dplyr,
+    purrr,
+    tibble,
+    jsonlite
+Suggests:
+    knitr,
+    testthat,
+    covr,
+    spelling,
+    rmarkdown
+URL: https://github.com/JBGruber/crowdtangler
+Encoding: UTF-8
+BugReports: https://github.com/JBGruber/paperboy/issues
+RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+Language: en-GB

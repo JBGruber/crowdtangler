@@ -1,0 +1,116 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# crowdtangler
+
+<!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/JBGruber/crowdtangler/workflows/R-CMD-check/badge.svg)](https://github.com/JBGruber/crowdtangler/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/JBGruber/crowdtangler/branch/main/graph/badge.svg)](https://codecov.io/gh/JBGruber/crowdtangler?branch=main)
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/JohannesBGruber.svg?style=social&label=Follow%20%40JohannesBGruber)](https://twitter.com/JohannesBGruber)
+<!-- badges: end -->
+
+The goal of crowdtangler is to provide easy access to the [CrowdTangle
+API](https://github.com/CrowdTangle/API).
+
+## Installation
+
+`crowdtangler` is not on [CRAN](https://CRAN.R-project.org) yet. Install
+via `remotes` (first install `remotes` via
+`install.packages("remotes")`:
+
+``` r
+remotes::install_github("JBGruber/crowdtangler")
+```
+
+## Authentication
+
+Go to your CrowdTangle account and get your token. That’s all you need
+to use the functions in this package. For convenience, you can save your
+token using a dedicated function:
+
+``` r
+library(crowdtangler)
+ct_auth(token = "XXXxxxXXX")
+```
+
+Select where you want to save your token in the interactive menu. From
+here on, whenever you load the package, your token will be there.
+
+## Check your lists
+
+Usually you want to do stuff with the lists you created on CrowdTangle.
+In the API this works using the list’s ID. To get the IDs of all lists
+in your account, call:
+
+``` r
+lists_df <- ct_getlists()
+```
+
+## Download leaderboard
+
+``` r
+leaderboard <- ct_leaderboard(
+  list = "1543877", # will only work if list is in your account
+  count = 10,
+  start = "2021-09-24T22:00:00",
+  end = "2021-09-25T22:00:00"
+)
+leaderboard
+#> # A tibble: 10 × 31
+#>    accout_id accout_name            accout_handle accout_profileI… accout_subscrib…
+#>        <int> <chr>                  <chr>         <chr>                       <int>
+#>  1   1555176 Alice Weidel           aliceweidel   https://sconten…           386348
+#>  2    445848 Karl Lauterbach        Karl.Lauterb… https://sconten…            82031
+#>  3   1295156 Armin Laschet          ArminLaschet  https://sconten…            54745
+#>  4    471941 Annalena Baerbock      abaerbock     https://sconten…            79141
+#>  5    627952 Prof. Dr. Jörg Meuthen Prof.Dr.Joer… https://sconten…           149164
+#>  6    449338 Olaf Scholz            olafscholz    https://sconten…            46418
+#>  7   2342315 Tino Chrupalla         TinoAfD       https://sconten…            28957
+#>  8    401961 Beatrix von Storch     BeatrixVonSt… https://sconten…           107326
+#>  9   2232965 Stephan Brandner, MdB  stBrandner    https://sconten…            25935
+#> 10    385506 Martin Sonneborn       MartinSonneb… https://sconten…           310728
+#> # … with 26 more variables: accout_url <chr>, accout_platform <chr>,
+#> #   accout_platformId <chr>, accout_accountType <chr>,
+#> #   accout_pageAdminTopCountry <chr>, accout_pageDescription <chr>,
+#> #   accout_pageCreatedDate <chr>, accout_pageCategory <chr>,
+#> #   accout_verified <lgl>, summary_loveCount <int>,
+#> #   summary_threePlusMinuteVideoCount <int>,
+#> #   summary_totalInteractionCount <int>, summary_wowCount <int>, …
+```
+
+## Download posts
+
+``` r
+posts <- ct_posts(
+  list = "1543877", # will only work if list is in your account
+  count = 10,
+  start = "2021-09-24T22:00:00",
+  end = "2021-09-25T22:00:00",
+  parse = TRUE
+)
+posts
+#> # A tibble: 10 × 36
+#>    accout_id accout_name     accout_handle   accout_profileIma… accout_subscrib…
+#>        <int> <chr>           <chr>           <chr>                         <int>
+#>  1    468446 Kai Wegner      kai.wegner2.0   https://scontent-…             6706
+#>  2    444484 Bodo Ramelow    bodo.ramelow    https://scontent-…            45472
+#>  3   1517959 Sarah Ryglewski sarah.ryglewski https://scontent-…             2952
+#>  4    453450 Marco Bülow     marco.buelow    https://scontent-…            16101
+#>  5   1379083 Michael Theurer michael.theurer https://scontent-…            27729
+#>  6   1295156 Armin Laschet   ArminLaschet    https://scontent-…            54745
+#>  7    449338 Olaf Scholz     olafscholz      https://scontent-…            46418
+#>  8    444689 Dirk Wiese      dirkwiesespd    https://scontent-…             4532
+#>  9    453906 Emmi Zeulner    ZeulnerEmmi     https://scontent-…             6035
+#> 10    444689 Dirk Wiese      dirkwiesespd    https://scontent-…             4532
+#> # … with 31 more variables: accout_url <chr>, accout_platform <chr>,
+#> #   accout_platformId <chr>, accout_accountType <chr>,
+#> #   accout_pageAdminTopCountry <chr>, accout_pageDescription <chr>,
+#> #   accout_pageCreatedDate <chr>, accout_pageCategory <chr>,
+#> #   accout_verified <lgl>, platformId <chr>, platform <chr>, date <chr>,
+#> #   updated <chr>, type <chr>, message <chr>, link <chr>, postUrl <chr>,
+#> #   subscriberCount <int>, score <dbl>, videoLengthMS <int>, …
+```

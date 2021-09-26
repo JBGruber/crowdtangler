@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+.cttoken
+Update_package.R
+^README\.Rmd$
