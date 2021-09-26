@@ -19,8 +19,8 @@ ct_posts(
   searchTerm = NULL,
   sortBy = NULL,
   verified = NULL,
-  parse = FALSE,
-  data = "./data",
+  parse = TRUE,
+  data = NULL,
   token = NULL
 )
 }
