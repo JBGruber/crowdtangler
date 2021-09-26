@@ -23,8 +23,8 @@ pull_pages <- function(url, pages, token, data) {
 
     cont <- content(res)
 
-    if (!is.null(cont[["message"]]) &
-        identical(cont[["code"]], 32L)) {
+    if (!is.null(cont[["message"]]) &&
+        !identical(cont[["code"]], 32L)) {
       warning(cont[["message"]])
     }
     if (identical(cont[["code"]], 32L)) {
