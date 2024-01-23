@@ -140,7 +140,7 @@ ct_posts <- function(accounts = NULL,
 #' @return data.frame (tibble)
 #' @export
 ct_parse_posts <- function(x, recursive = FALSE) {
-  if (dir.exists(x)) {
+  if (dir.exists(x)[[1]]) {
     x <- list.files(
       path = x,
       pattern = ".json$",
