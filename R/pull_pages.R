@@ -1,7 +1,7 @@
 #' Internal function to iterate over pages
 #' @import httr
 #' @noRd
-pull_pages <- function(url, pages, token, data) {
+pull_pages <- function(url, pages, token, data, filename) {
 
   json_files <- character()
   i <- 1
@@ -14,7 +14,8 @@ pull_pages <- function(url, pages, token, data) {
     res <- GET(url, add_headers("x-api-token" = token))
 
     file <- paste0(
-      data, "/ct_pull",
+      data, "/ct_pull_",
+      gsub("[^[:alnum:]]", "_", paste0(filename, "_")),
       gsub(":|\\s", "_", Sys.time()),
       ".json"
     )
@@ -41,3 +42,5 @@ pull_pages <- function(url, pages, token, data) {
 
   return(json_files)
 }
+
+

@@ -33,6 +33,7 @@
 #'   matching the input.
 #' @param parse Logical. Should data be parsed?
 #' @param data A directory to store json files in.
+#' @param filename Specify a string to be inserted in the json file names.
 #'
 #' @details For details see https://github.com/CrowdTangle/API/wiki/Posts.
 #'
@@ -54,7 +55,8 @@ ct_posts <- function(accounts = NULL,
                      verified = NULL,
                      parse = TRUE,
                      data = NULL,
-                     token = NULL) {
+                     token = NULL,
+                     filename = NULL) {
 
   base_url <- "https://api.crowdtangle.com/"
 
@@ -116,7 +118,7 @@ ct_posts <- function(accounts = NULL,
   )
 
   json_files <- pull_pages(url = url, pages = pages,
-                           data = data, token = token)
+                           data = data, token = token, filename = filename)
 
   if (parse) {
     return(ct_parse_posts(json_files))
