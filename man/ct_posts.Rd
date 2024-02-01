@@ -21,7 +21,8 @@ ct_posts(
   verified = NULL,
   parse = TRUE,
   data = NULL,
-  token = NULL
+  token = NULL,
+  filename = NULL
 )
 }
 \arguments{
@@ -72,6 +73,8 @@ matching the input.}
 \item{data}{A directory to store json files in.}
 
 \item{token}{token.}
+
+\item{filename}{Specify a string to be inserted in the json file names.}
 }
 \description{
 Retrieves posts from accounts of lists of accounts.
